@@ -1,11 +1,17 @@
 # pytorch-liteflownet
-This is a personal reimplementation of LiteFlowNet [1] using PyTorch. Should you be making use of this work, please cite the paper accordingly. Also, make sure to adhere to the <a href="https://github.com/twhui/LiteFlowNet#license-and-citation">licensing terms</a> of the authors. Should you be making use of this particular implementation, please acknowledge it appropriately [2].
+This is a forked copy of <a href="https://github.com/sniklaus/pytorch-liteflownet">pytorch-liteflownet</a>, which is itself a personal reimplementation of LiteFlowNet [1] using PyTorch. This forked repository is customized for allowing reading and processing multiple image pairs in a directory.
+
+Should you be making use of this work, please cite the original paper [1] accordingly and make sure to adhere to the <a href="https://github.com/twhui/LiteFlowNet#license-and-citation">licensing terms</a> of the authors. Also, please acknowledge the original reimplementation appropriately [2].
 
 <a href="https://arxiv.org/abs/1805.07036" rel="Paper"><img src="http://www.arxiv-sanity.com/static/thumbs/1805.07036v1.pdf.jpg" alt="Paper" width="100%"></a>
 
 For the original Caffe version of this work, please see: https://github.com/twhui/LiteFlowNet
 <br />
-Other optical flow implementations from me: [pytorch-pwc](https://github.com/sniklaus/pytorch-pwc), [pytorch-unflow](https://github.com/sniklaus/pytorch-unflow), [pytorch-spynet](https://github.com/sniklaus/pytorch-spynet)
+Another optical flow implementation from me: https://github.com/sniklaus/pytorch-pwc
+<br />
+And another optical flow implementation from me: https://github.com/sniklaus/pytorch-spynet
+<br />
+Yet another optical flow implementation from me: https://github.com/sniklaus/pytorch-unflow
 
 ## setup
 The correlation layer is implemented in CUDA using CuPy, which is why CuPy is a required dependency. It can be installed using `pip install cupy` or alternatively using one of the provided [binary packages](https://docs.cupy.dev/en/stable/install.html#installing-cupy) as outlined in the CuPy repository. If you would like to use Docker, you can take a look at [this](https://github.com/sniklaus/pytorch-liteflownet/pull/43) pull request to get started.
@@ -14,7 +20,7 @@ The correlation layer is implemented in CUDA using CuPy, which is why CuPy is a 
 To run it on your own pair of images, use the following command. You can choose between three models, please make sure to see their paper / the code for more details.
 
 ```
-python run.py --model default --one ./images/one.png --two ./images/two.png --out ./out.flo
+python run.py --model default --first ./images/first.png --second ./images/second.png --out ./out.flo
 ```
 
 I am afraid that I cannot guarantee that this reimplementation is correct. However, it produced results pretty much identical to the implementation of the original authors in the examples that I tried. There are some numerical deviations that stem from differences in the `DownsampleLayer` of Caffe and the `torch.nn.functional.interpolate` function of PyTorch. Please feel free to contribute to this repository by submitting issues and pull requests.
